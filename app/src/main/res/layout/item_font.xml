@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="88dp"
+    android:layout_height="66dp"
+    android:layout_margin="3dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="#1B1D24"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp"
+    app:strokeWidth="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_font"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="8dp"
+            android:text="Aa"
+            android:textColor="#F7F7FA"
+            android:textSize="18sp"/>
+
+        <View
+            android:id="@+id/view_selected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_selected_card"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>

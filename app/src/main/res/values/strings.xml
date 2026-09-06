@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DrawCanvas</string>
+    <string name="splash_subtitle">Create. Draw. Make it yours.</string>
+    <string name="welcome">Welcome</string>
+    <string name="get_started">Get Started</string>
+    <string name="onboarding_description">
+    Choose a photo and start creating with stickers, text, frames and drawing tools.</string>
+
+</resources>
