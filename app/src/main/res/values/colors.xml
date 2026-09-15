@@ -3,4 +3,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bg_btn_camera">#33787880</color>
+    <color name="landing_background">#F8F8FF</color>
+    <color name="landing_primary">#6C5CE7</color>
+    <color name="landing_navy">#172554</color>
+    <color name="landing_muted">#73779A</color>
+    <color name="landing_banner_purple">#EDEBFF</color>
+    <color name="landing_banner_pink">#FBE0F2</color>
+    <color name="landing_banner_peach">#FFE7DB</color>
+    <color name="landing_banner_blue">#DDF3FF</color>
+    <color name="landing_promotion_blue">#D8F2FF</color>
+    <color name="landing_promotion_peach">#FFE0D5</color>
+    <color name="landing_promotion_mint">#DDF8EF</color>
+    <color name="landing_art_surface">#B7AFFF</color>
+    <color name="landing_indicator_inactive">#DCD9F4</color>
+    <color name="landing_start_stroke">#C9CDE1</color>
 </resources>

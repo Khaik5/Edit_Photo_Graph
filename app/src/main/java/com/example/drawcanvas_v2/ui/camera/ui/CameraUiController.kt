@@ -28,6 +28,7 @@ class CameraUiController(
     private var isBrightnessPanelOpen = false
     private var isSizePanelOpen = false
     private var isTimerPanelOpen = false
+    private var isFilterPanelOpen = false
 
     fun bindActions(
         onAction: (CameraAction) -> Unit,
@@ -70,7 +71,7 @@ class CameraUiController(
             setBrightnessPanelOpen(false)
             setSizePanelOpen(false)
             setTimerPanelOpen(false)
-            binding.scrollLayoutFilter.isVisible = !binding.scrollLayoutFilter.isVisible
+            setFilterPanelOpen(!isFilterPanelOpen)
         }
         binding.optionFilterNone.setOnClickListener { selectFilter(onAction, FilterMode.NONE, null) }
         binding.optionFilterHeadRabbit.setOnClickListener {
@@ -127,7 +128,7 @@ class CameraUiController(
         binding.tvTimerValue.text = if (timerSeconds > 0) timerSeconds.toString() else ""
         binding.textCurrentSize.text = state.cameraSize.label()
         binding.faceOverlayView.updateFilter(
-            if (state.captureMode == CaptureMode.VIDEO && state.isRecordingLocked) FilterMode.NONE else state.filterMode,
+            if (state.captureMode == CaptureMode.PHOTO) state.filterMode else FilterMode.NONE,
             state.filterBitmap
         )
         binding.tvLight.text = state.brightness.toString()
@@ -191,14 +192,17 @@ class CameraUiController(
 
     private fun renderRecordingLock(state: CameraState) {
         val enabled = !state.isRecordingLocked
+        val filterEnabled = enabled && state.captureMode == CaptureMode.PHOTO
         setEnabled(binding.btnPhotoMode, enabled)
         setEnabled(binding.btnVideoMode, enabled)
         setEnabled(binding.btnSwap, enabled)
         setEnabled(binding.btnSize, enabled)
         setEnabled(binding.btnTimer, enabled)
-        setEnabled(binding.btnFilter, enabled)
+        setEnabled(binding.btnFilter, filterEnabled)
+        if (!filterEnabled && isFilterPanelOpen) {
+            setFilterPanelOpen(false)
+        }
         if (!enabled) {
-            binding.scrollLayoutFilter.isVisible = false
             setSizePanelOpen(false)
             setTimerPanelOpen(false)
         }
@@ -241,7 +245,7 @@ class CameraUiController(
     }
 
     private fun selectFilter(onAction: (CameraAction) -> Unit, mode: FilterMode, bitmap: Bitmap?) {
-        binding.scrollLayoutFilter.isVisible = false
+        setFilterPanelOpen(false)
         onAction(CameraAction.FilterSelected(mode, bitmap))
     }
 
@@ -277,6 +281,7 @@ class CameraUiController(
         if (open) {
             setSizePanelOpen(false)
             setTimerPanelOpen(false)
+            setFilterPanelOpen(false)
         }
         isBrightnessPanelOpen = open && binding.btnLight.isEnabled
         binding.layoutSeekBar.isVisible = isBrightnessPanelOpen
@@ -285,7 +290,6 @@ class CameraUiController(
         binding.btnGrid.isVisible = !isBrightnessPanelOpen
         binding.layoutBtnTimer.isVisible = !isBrightnessPanelOpen
         if (isBrightnessPanelOpen) {
-            binding.scrollLayoutFilter.isVisible = false
             binding.layoutSize.isVisible = false
             binding.layoutTimer.isVisible = false
             isSizePanelOpen = false
@@ -294,7 +298,10 @@ class CameraUiController(
     }
 
     private fun setSizePanelOpen(open: Boolean) {
-        if (open) setTimerPanelOpen(false)
+        if (open) {
+            setTimerPanelOpen(false)
+            setFilterPanelOpen(false)
+        }
         isSizePanelOpen = open
         binding.layoutSize.isVisible = open
         binding.layoutSize.post { binding.layoutSize.smoothScrollTo(0, 0) }
@@ -307,7 +314,6 @@ class CameraUiController(
         }
         if (open) {
             binding.layoutSeekBar.isVisible = false
-            binding.scrollLayoutFilter.isVisible = false
             binding.layoutTimer.isVisible = false
             isBrightnessPanelOpen = false
             isTimerPanelOpen = false
@@ -315,6 +321,7 @@ class CameraUiController(
     }
 
     private fun setTimerPanelOpen(open: Boolean) {
+        if (open) setFilterPanelOpen(false)
         isTimerPanelOpen = open
         binding.layoutTimer.isVisible = open
         binding.btnLightLayout.isVisible = !open
@@ -326,10 +333,41 @@ class CameraUiController(
         }
         if (open) {
             binding.layoutSeekBar.isVisible = false
-            binding.scrollLayoutFilter.isVisible = false
             binding.layoutSize.isVisible = false
             isBrightnessPanelOpen = false
             isSizePanelOpen = false
+        }
+    }
+
+    private fun setFilterPanelOpen(open: Boolean) {
+        val canOpen = open && binding.btnFilter.isEnabled
+        isFilterPanelOpen = canOpen
+        binding.scrollLayoutFilter.isVisible = canOpen
+        binding.layoutBtnFilter.layoutParams = binding.layoutBtnFilter.layoutParams.apply {
+            width = if (canOpen) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+        }
+        binding.scrollLayoutFilter.layoutParams = binding.scrollLayoutFilter.layoutParams.apply {
+            width = if (canOpen) 0 else ViewGroup.LayoutParams.WRAP_CONTENT
+            if (this is android.widget.LinearLayout.LayoutParams) {
+                weight = if (canOpen) 1f else 0f
+            }
+        }
+        if (canOpen) {
+            binding.btnLightLayout.isVisible = false
+            binding.layoutBtnSize.isVisible = false
+            binding.btnGrid.isVisible = false
+            binding.layoutBtnTimer.isVisible = false
+            binding.layoutSeekBar.isVisible = false
+            binding.layoutSize.isVisible = false
+            binding.layoutTimer.isVisible = false
+            isBrightnessPanelOpen = false
+            isSizePanelOpen = false
+            isTimerPanelOpen = false
+        } else if (!isBrightnessPanelOpen && !isSizePanelOpen && !isTimerPanelOpen) {
+            binding.btnLightLayout.isVisible = true
+            binding.layoutBtnSize.isVisible = true
+            binding.btnGrid.isVisible = true
+            binding.layoutBtnTimer.isVisible = true
         }
     }
 

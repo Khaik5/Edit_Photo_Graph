@@ -47,6 +47,10 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name="com.example.drawcanvas_v2.ui.home.landing.LandingHomeActivity"
+            android:exported="false" />
+
+        <activity
             android:name="com.example.drawcanvas_v2.ui.home.GalleryActivity"
             android:exported="false" />
 

@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.drawcanvas_v2.databinding.ActivitySplashBinding
-import com.example.drawcanvas_v2.MainActivity
+import com.example.drawcanvas_v2.ui.home.landing.LandingHomeActivity
 import com.example.drawcanvas_v2.utils.AnimationUtils
 import com.example.drawcanvas_v2.utils.InsetsUtils
 import com.example.drawcanvas_v2.utils.collectFlow
@@ -43,11 +43,11 @@ class SplashActivity : AppCompatActivity() {
         effect: SplashEffect
     ) {
         when (effect) {
-            SplashEffect.OpenOnboarding -> { openOnboarding() }
+            SplashEffect.OpenHome -> { openHome() }
         }
     }
-    private fun openOnboarding() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun openHome() {
+        val intent = Intent(this, LandingHomeActivity::class.java)
         startActivity(intent)
         finish()
     }

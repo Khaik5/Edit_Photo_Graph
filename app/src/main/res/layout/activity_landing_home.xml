@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/landing_background">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/landing_margin"
+        android:layout_marginTop="@dimen/landing_header_top"
+        android:layout_marginEnd="@dimen/landing_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_app_icon"
+            android:layout_width="@dimen/landing_logo_size"
+            android:layout_height="@dimen/landing_logo_size"
+            android:layout_marginEnd="@dimen/landing_logo_gap"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_draw_canvas" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/landing_navy"
+                android:textSize="@dimen/landing_title_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_app_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/landing_card_gap"
+                android:text="@string/landing_subtitle"
+                android:textColor="@color/landing_muted"
+                android:textSize="@dimen/landing_subtitle_size" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/landing_button_height"
+            android:minHeight="0dp"
+            android:text="@string/landing_start"
+            android:textAllCaps="false"
+            android:textColor="@color/landing_navy"
+            android:textSize="@dimen/landing_cta_text_size"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="@dimen/landing_button_radius"
+            app:icon="@drawable/ic_draw"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/landing_action_icon_padding"
+            app:iconSize="@dimen/landing_action_icon_size"
+            app:iconTint="@color/landing_navy"
+            app:strokeColor="@color/landing_start_stroke"
+            app:strokeWidth="@dimen/landing_start_stroke_width"
+            />
+
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_promotions"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/landing_banner_height"
+        android:layout_marginStart="@dimen/landing_margin"
+        android:layout_marginTop="@dimen/landing_margin"
+        android:layout_marginEnd="@dimen/landing_margin"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <LinearLayout
+        android:id="@+id/indicator_container"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/landing_indicator_size"
+        android:layout_marginTop="@dimen/landing_card_gap"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vp_promotions">
+
+        <View
+            android:id="@+id/indicator1"
+            android:layout_width="@dimen/landing_indicator_size"
+            android:layout_height="@dimen/landing_indicator_size"
+            android:background="@drawable/bg_landing_indicator_selected" />
+
+        <View
+            android:id="@+id/indicator2"
+            android:layout_width="@dimen/landing_indicator_size"
+            android:layout_height="@dimen/landing_indicator_size"
+            android:layout_marginStart="@dimen/landing_indicator_gap"
+            android:background="@drawable/bg_landing_indicator_inactive" />
+
+        <View
+            android:id="@+id/indicator3"
+            android:layout_width="@dimen/landing_indicator_size"
+            android:layout_height="@dimen/landing_indicator_size"
+            android:layout_marginStart="@dimen/landing_indicator_gap"
+            android:background="@drawable/bg_landing_indicator_inactive" />
+
+        <View
+            android:id="@+id/indicator4"
+            android:layout_width="@dimen/landing_indicator_size"
+            android:layout_height="@dimen/landing_indicator_size"
+            android:layout_marginStart="@dimen/landing_indicator_gap"
+            android:background="@drawable/bg_landing_indicator_inactive" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/section_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/landing_margin"
+        android:layout_marginTop="@dimen/landing_section_gap"
+        android:layout_marginEnd="@dimen/landing_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/indicator_container">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/landing_popular_right_now"
+            android:textColor="@color/landing_navy"
+            android:textSize="@dimen/landing_promotion_title_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_see_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/landing_see_all"
+            android:textColor="@color/landing_muted"
+            android:textSize="@dimen/landing_subtitle_size" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_promotions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/landing_card_gap"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/landing_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/section_header" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@ class SplashViewModel : ViewModel() {
             _state.value = SplashState(isLoading = true)
             delay(2000)
             _state.value = SplashState(isLoading = false)
-            _effect.send(SplashEffect.OpenOnboarding)
+            _effect.send(SplashEffect.OpenHome)
         }
     }
 }

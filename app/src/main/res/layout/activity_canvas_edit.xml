@@ -183,7 +183,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingStart="8dp"
@@ -195,35 +195,35 @@
             android:id="@+id/panel_sticker"
             layout="@layout/panel_sticker"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
 
         <include
             android:id="@+id/panel_draw"
             layout="@layout/panel_draw"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
 
         <include
             android:id="@+id/panel_text"
             layout="@layout/panel_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
 
         <include
             android:id="@+id/panel_frame"
             layout="@layout/panel_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
 
         <include
             android:id="@+id/panel_adjustment"
             layout="@layout/panel_adjustment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
 
 
@@ -231,7 +231,7 @@
             android:id="@+id/panel_filter"
             layout="@layout/panel_filter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
         <include
             android:id="@+id/panel_crop"

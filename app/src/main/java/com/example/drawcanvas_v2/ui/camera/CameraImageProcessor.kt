@@ -91,12 +91,23 @@ object CameraImageProcessor {
         bitmap: Bitmap,
         cameraSize: CameraSize
     ): Bitmap {
-        val targetRatio =
+        val landscapeRatio =
             when (cameraSize) {
                 CameraSize.S1_1 -> 1f
                 CameraSize.S4_3 -> 4f / 3f
                 CameraSize.S16_9 -> 16f / 9f
                 CameraSize.SFull -> return bitmap
+            }
+
+        // CameraSize labels describe the camera sensor in landscape. The bitmap has
+        // already been rotated for the current device orientation, so a portrait
+        // capture must use the reciprocal ratio (3:4 / 9:16). Without this, the
+        // live guide is portrait while the saved image is cropped landscape.
+        val targetRatio =
+            if (bitmap.height > bitmap.width) {
+                1f / landscapeRatio
+            } else {
+                landscapeRatio
             }
 
         val sourceRatio =
@@ -106,10 +117,10 @@ object CameraImageProcessor {
 
         if (sourceRatio > targetRatio) {
             cropHeight = bitmap.height
-            cropWidth = (cropHeight * targetRatio).toInt()
+            cropWidth = (cropHeight * targetRatio).toInt().coerceAtLeast(1)
         } else {
             cropWidth = bitmap.width
-            cropHeight = (cropWidth / targetRatio).toInt()
+            cropHeight = (cropWidth / targetRatio).toInt().coerceAtLeast(1)
         }
 
         val left =

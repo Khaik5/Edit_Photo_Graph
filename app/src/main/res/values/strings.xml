@@ -5,5 +5,46 @@
     <string name="get_started">Get Started</string>
     <string name="onboarding_description">
     Choose a photo and start creating with stickers, text, frames and drawing tools.</string>
+    <string name="landing_subtitle">Create. Edit. Be Creative.</string>
+    <string name="landing_start">Start</string>
+    <string name="landing_popular_right_now">Popular Right Now</string>
+    <string name="landing_see_all">See all</string>
+    <string name="landing_banner_drawing_title">Drawing Tools&#10;Just for You</string>
+    <string name="landing_banner_drawing_description">Sketch • Paint • Doodle</string>
+    <string name="landing_banner_drawing_cta">Try Now</string>
+    <string name="landing_banner_text_title">Add Text Your Way</string>
+    <string name="landing_banner_text_description">Fonts • Colors • Styles</string>
+    <string name="landing_banner_text_cta">Preview</string>
+    <string name="landing_banner_sticker_title">Creative Stickers</string>
+    <string name="landing_banner_sticker_description">Decorate • Express • Create</string>
+    <string name="landing_banner_sticker_cta">View</string>
+    <string name="landing_banner_filter_title">Filters &amp; Effects</string>
+    <string name="landing_banner_filter_description">Adjust • Filter • Enhance</string>
+    <string name="landing_banner_filter_cta">Explore</string>
+    <string name="landing_promotion_edit_title">Edit Photos&#10;Like a Pro</string>
+    <string name="landing_promotion_edit_subtitle">Crop • Filter • Add Sticker</string>
+    <string name="landing_promotion_edit_cta">Explore</string>
+    <string name="landing_promotion_sticker_title">Creative Stickers</string>
+    <string name="landing_promotion_sticker_subtitle">Make your art more fun&#10;with unique stickers</string>
+    <string name="landing_promotion_sticker_cta">Check it out</string>
+    <string name="landing_promotion_canvas_title">Custom Canvas</string>
+    <string name="landing_promotion_canvas_subtitle">Multiple sizes for&#10;every idea</string>
+    <string name="landing_promotion_canvas_cta">Start Drawing</string>
+    <string name="landing_promotion_tools_title">Drawing Tools</string>
+    <string name="landing_promotion_tools_subtitle">Brushes • Pens • Colors</string>
+    <string name="landing_promotion_tools_cta">Open Tools</string>
+    <string name="landing_promotion_text_title">Add Text Your Way</string>
+    <string name="landing_promotion_text_subtitle">Fonts • Colors • Styles</string>
+    <string name="landing_promotion_text_cta">Try Text</string>
+    <string name="landing_promotion_filter_title">Filters &amp; Effects</string>
+    <string name="landing_promotion_filter_subtitle">Adjust • Filter • Enhance</string>
+    <string name="landing_promotion_filter_cta">Explore</string>
+    <string name="landing_promotion_frame_title">Frames &amp; Layouts</string>
+    <string name="landing_promotion_frame_subtitle">Make every photo special</string>
+    <string name="landing_promotion_frame_cta">View Frames</string>
+    <string name="landing_promotion_art_title">Art Studio</string>
+    <string name="landing_promotion_art_subtitle">Paint with your own style</string>
+    <string name="landing_promotion_art_cta">Create</string>
+    <string name="edit_photo">Edit Photo</string>
 
 </resources>

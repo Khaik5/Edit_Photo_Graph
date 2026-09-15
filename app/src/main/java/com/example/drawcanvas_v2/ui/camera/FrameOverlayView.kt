@@ -88,7 +88,7 @@ class FrameOverlayView @JvmOverloads constructor(
             width.toFloat()
         val viewHeight =
             height.toFloat()
-        val heightMultiplier =
+        val landscapeRatio =
             when (cameraSize) {
                 CameraSize.S1_1 -> 1f
                 CameraSize.S4_3 -> 4f / 3f
@@ -96,11 +96,14 @@ class FrameOverlayView @JvmOverloads constructor(
                 CameraSize.SFull -> return RectF(0f, 0f, viewWidth, viewHeight)
             }
 
-        val frameWidth = viewWidth
-        val frameHeight = (frameWidth * heightMultiplier).coerceAtMost(viewHeight)
-        val left = 0f
-        val top = (viewHeight * FRAME_TOP_FRACTION)
-            .coerceAtMost((viewHeight - frameHeight).coerceAtLeast(0f))
+        // Keep the guide's crop window identical to the crop performed on the
+        // captured bitmap, including landscape and portrait orientations.
+        val targetRatio =
+            if (viewHeight > viewWidth) 1f / landscapeRatio else landscapeRatio
+        val frameWidth = minOf(viewWidth, viewHeight * targetRatio)
+        val frameHeight = frameWidth / targetRatio
+        val left = (viewWidth - frameWidth) / 2f
+        val top = (viewHeight - frameHeight) / 2f
         return RectF(
             left,
             top,
@@ -109,7 +112,4 @@ class FrameOverlayView @JvmOverloads constructor(
         )
     }
 
-    private companion object {
-        const val FRAME_TOP_FRACTION = 0.10f
-    }
 }

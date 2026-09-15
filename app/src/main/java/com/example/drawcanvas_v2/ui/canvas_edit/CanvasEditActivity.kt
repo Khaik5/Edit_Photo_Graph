@@ -173,15 +173,24 @@ class CanvasEditActivity : AppCompatActivity() {
         }
     }
 
-    private fun editText(sticker: TextSticker) {
+    private fun editText(sticker: TextSticker, isNew: Boolean = false) {
         viewModel.setSelectedText(sticker)
-        DialogUtils.textInput(this, sticker.getText()) { text ->
-            if (text.isNotBlank()) {
-                sticker.setText(text)
-                binding.stickerView.invalidate()
-                viewModel.onAction(CanvasEditAction.Changed)
+        DialogUtils.textInput(
+            context = this,
+            initial = sticker.getText(),
+            onResult = { text ->
+                if (text.isNotBlank()) {
+                    sticker.setText(text)
+                    binding.stickerView.invalidate()
+                    viewModel.onAction(CanvasEditAction.Changed)
+                } else if (isNew) {
+                    binding.stickerView.removeSticker(sticker)
+                }
+            },
+            onCancel = {
+                if (isNew) binding.stickerView.removeSticker(sticker)
             }
-        }
+        )
     }
     private fun observe() {
         collectFlow(viewModel.state) { state ->
@@ -200,9 +209,6 @@ class CanvasEditActivity : AppCompatActivity() {
             cropViewModel.state
         ) { state ->
             cropUi.render(state)
-        }
-        collectFlow(viewModel.effect) { effect ->
-            handleEffect(effect)
         }
         collectFlow(viewModel.effect) { effect ->
             handleEffect(effect)
@@ -300,7 +306,7 @@ class CanvasEditActivity : AppCompatActivity() {
     private fun addText() {
         val sticker = TextSticker(this, "Enter Your Text")
         binding.stickerView.addSticker(sticker)
-        editText(sticker)
+        editText(sticker, isNew = true)
     }
 
     private fun addSticker(item: StickerItem) {

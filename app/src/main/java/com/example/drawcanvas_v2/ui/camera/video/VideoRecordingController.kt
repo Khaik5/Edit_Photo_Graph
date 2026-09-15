@@ -2,6 +2,7 @@ package com.example.drawcanvas_v2.ui.camera.video
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.MediaStore
 import androidx.camera.video.FallbackStrategy
@@ -52,13 +53,21 @@ class VideoRecordingController {
         ).setContentValues(values).build()
         try {
             var pending = capture.output.prepareRecording(context, output)
-            if (withAudio) pending = pending.withAudioEnabled()
+            if (
+                withAudio &&
+                ContextCompat.checkSelfPermission(
+                    context,
+                    android.Manifest.permission.RECORD_AUDIO
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                pending = pending.withAudioEnabled()
+            }
             activeRecording = pending.start(ContextCompat.getMainExecutor(context)) { event ->
                 when (event) {
                     is VideoRecordEvent.Start -> onEvent(VideoRecordingEvent.Started)
                     is VideoRecordEvent.Status -> onEvent(
                         VideoRecordingEvent.DurationChanged(
-                            event.recordingStats.recordedDurationNanos / NANOS_PER_MILLISECOND
+                            event.recordingStats.recordedDurationNanos / NANOS_PER_MILLISECOND // thgian quay video
                         )
                     )
                     is VideoRecordEvent.Finalize -> {

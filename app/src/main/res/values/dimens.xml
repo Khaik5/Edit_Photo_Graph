@@ -1,4 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="size_25">25dp</dimen>
+
+    <!-- General -->
+    <dimen name="landing_margin">16dp</dimen>
+    <dimen name="landing_header_top">16dp</dimen>
+
+    <!-- Banner -->
+    <dimen name="landing_banner_height">196dp</dimen>
+
+    <!-- Indicator -->
+    <dimen name="landing_indicator_size">8dp</dimen>
+    <dimen name="landing_indicator_gap">6dp</dimen>
+
+    <!-- Section -->
+    <dimen name="landing_section_gap">18dp</dimen>
+
+    <!-- Promotion Card -->
+    <dimen name="landing_card_gap">5dp</dimen>
+
+    <dimen name="landing_promotion_height">124dp</dimen>
+
+    <dimen name="landing_promotion_padding">14dp</dimen>
+    <dimen name="landing_promotion_padding_vertical">12dp</dimen>
+
+    <!-- Radius -->
+    <dimen name="landing_radius_large">20dp</dimen>
+    <dimen name="landing_radius_medium">18dp</dimen>
+
+    <!-- Button -->
+    <dimen name="landing_button_height">34dp</dimen>
+    <dimen name="landing_promotion_button_height">36dp</dimen>
+    <dimen name="landing_button_radius">14dp</dimen>
+
+    <!-- Art -->
+    <dimen name="landing_promotion_art_width">108dp</dimen>
+    <dimen name="landing_art_size">88dp</dimen>
+    <dimen name="landing_art_padding">12dp</dimen>
+
+    <!-- Header text -->
+    <dimen name="landing_title_size">24sp</dimen>
+    <dimen name="landing_subtitle_size">12sp</dimen>
+
+    <!-- Banner text -->
+    <dimen name="landing_banner_title_size">21sp</dimen>
+    <dimen name="landing_banner_description_size">13sp</dimen>
+
+    <!-- Promotion text -->
+    <dimen name="landing_promotion_title_size">17sp</dimen>
+    <dimen name="landing_promotion_subtitle_size">11sp</dimen>
+    <dimen name="landing_cta_text_size">10sp</dimen>
+
+    <!-- Ratio -->
+    <dimen name="landing_ratio_text_size">9sp</dimen>
+    <dimen name="landing_ratio_gap">4dp</dimen>
+
+    <dimen name="landing_ratio_width_small">28dp</dimen>
+    <dimen name="landing_ratio_height_small">36dp</dimen>
+
+    <dimen name="landing_ratio_width_medium">30dp</dimen>
+    <dimen name="landing_ratio_height_medium">44dp</dimen>
+
+    <dimen name="landing_ratio_width_large">30dp</dimen>
+    <dimen name="landing_ratio_height_large">54dp</dimen>
+
+    <!-- Logo -->
+    <dimen name="landing_logo_size">42dp</dimen>
+    <dimen name="landing_logo_gap">10dp</dimen>
+
+    <!-- Icon -->
+    <dimen name="landing_action_icon_padding">4dp</dimen>
+    <dimen name="landing_action_icon_size">13dp</dimen>
+
+    <dimen name="preview_edit_icon_padding">14dp</dimen>
+
+    <!-- Start -->
+    <dimen name="landing_start_stroke_width">1dp</dimen>
+
 </resources>

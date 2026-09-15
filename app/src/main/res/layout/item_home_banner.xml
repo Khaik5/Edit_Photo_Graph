@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:focusable="false"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="@dimen/landing_radius_large"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <FrameLayout
+        android:id="@+id/banner_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/landing_margin"
+        android:paddingTop="@dimen/landing_margin"
+        android:paddingEnd="@dimen/landing_margin"
+        android:paddingBottom="@dimen/landing_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/landing_navy"
+                    android:textSize="@dimen/landing_banner_title_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/landing_card_gap"
+                    android:textColor="@color/landing_muted"
+                    android:textSize="@dimen/landing_banner_description_size" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/landing_button_height"
+                    android:layout_marginTop="@dimen/landing_margin"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:minHeight="0dp"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/landing_cta_text_size"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/landing_primary"
+                    app:cornerRadius="@dimen/landing_button_radius"
+                    app:iconGravity="textStart"
+                    app:iconPadding="@dimen/landing_action_icon_padding"
+                    app:iconSize="@dimen/landing_action_icon_size"
+                    app:iconTint="@color/white"
+                    />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="@dimen/landing_promotion_art_width"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/landing_card_gap">
+
+                <View
+                    android:layout_width="@dimen/landing_art_size"
+                    android:layout_height="@dimen/landing_art_size"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_landing_art_surface" />
+
+                <ImageView
+                    android:id="@+id/iv_tool"
+                    android:layout_width="@dimen/landing_art_size"
+                    android:layout_height="@dimen/landing_art_size"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:padding="@dimen/landing_art_padding"
+                    android:scaleType="fitCenter" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>

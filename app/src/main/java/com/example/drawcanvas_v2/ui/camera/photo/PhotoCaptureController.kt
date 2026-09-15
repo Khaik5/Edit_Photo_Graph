@@ -9,6 +9,7 @@ import com.example.drawcanvas_v2.ui.camera.CameraState
 import com.example.drawcanvas_v2.ui.camera.FlashState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.concurrent.Executor
@@ -61,32 +62,53 @@ class PhotoCaptureController {
         onPhotoReady: (String) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        val cropped = try {
-            val raw = CameraImageProcessor.imageProxyToBitmap(image)
-            val rotation = image.imageInfo.rotationDegrees
-            CameraImageProcessor.cropToCameraSize(
-                CameraImageProcessor.rotateAndMirror(
-                    raw,
-                    rotation,
-                    state.cameraSelector == androidx.camera.core.CameraSelector.DEFAULT_FRONT_CAMERA
-                ),
-                state.cameraSize
-            )
-        } catch (exception: Exception) {
-            image.close()
-            scope.launch { onFailure("Cannot process photo") }
-            return
-        }
-        image.close()
         scope.launch {
+            val cropped = try {
+                withContext(Dispatchers.Default) {
+                    var raw: android.graphics.Bitmap? = null
+                    var oriented: android.graphics.Bitmap? = null
+                    try {
+                        raw = CameraImageProcessor.imageProxyToBitmap(image)
+                        val rotation = image.imageInfo.rotationDegrees
+                        oriented = CameraImageProcessor.rotateAndMirror(
+                            raw,
+                            rotation,
+                            state.cameraSelector == androidx.camera.core.CameraSelector.DEFAULT_FRONT_CAMERA
+                        )
+                        val result = CameraImageProcessor.cropToCameraSize(
+                            oriented,
+                            state.cameraSize
+                        )
+                        if (oriented !== result && !oriented!!.isRecycled) oriented!!.recycle()
+                        if (raw !== result && raw !== oriented && !raw!!.isRecycled) raw!!.recycle()
+                        result
+                    } catch (error: Throwable) {
+                        if (oriented != null && oriented !== raw && !oriented!!.isRecycled) oriented!!.recycle()
+                        if (raw != null && !raw!!.isRecycled) raw!!.recycle()
+                        throw error
+                    } finally {
+                        image.close()
+                    }
+                }
+            } catch (error: Throwable) {
+                if (error is CancellationException) throw error
+                onFailure("Cannot process photo")
+                return@launch
+            }
+
+            var filtered: android.graphics.Bitmap? = null
             try {
-                val filtered = CameraImageProcessor.applySelectedFilter(cropped, state)
+                filtered = CameraImageProcessor.applySelectedFilter(cropped, state)
                 val uri = withContext(Dispatchers.IO) {
-                    CameraImageProcessor.saveBitmapToCache(context, filtered)
+                    CameraImageProcessor.saveBitmapToCache(context, filtered!!)
                 }
                 onPhotoReady(uri.toString())
-            } catch (exception: Exception) {
+            } catch (error: Throwable) {
+                if (error is CancellationException) throw error
                 onFailure("Cannot process photo")
+            } finally {
+                if (filtered != null && filtered !== cropped && !filtered!!.isRecycled) filtered!!.recycle()
+                if (!cropped.isRecycled) cropped.recycle()
             }
         }
     }

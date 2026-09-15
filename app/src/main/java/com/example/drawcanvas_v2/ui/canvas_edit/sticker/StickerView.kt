@@ -565,6 +565,16 @@ class StickerView @JvmOverloads constructor(
         invalidate()
     }
 
+    fun removeSticker(sticker: BaseSticker) {
+        if (!stickers.remove(sticker)) return
+        sticker.isSelected = false
+        if (selectedSticker === sticker) {
+            selectedSticker = null
+            onStickerSelected?.invoke(null)
+        }
+        invalidate()
+    }
+
     private fun distance(
         x1: Float,
         y1: Float,

@@ -113,7 +113,13 @@ class CameraViewModel : ViewModel() {
         if (_state.value.isRecordingLocked || _state.value.captureMode == mode) return
         cancelCountdown()
         _state.update {
-            it.copy(captureMode = mode, flashState = FlashState.OFF, recordingDurationMillis = 0L)
+            it.copy(
+                captureMode = mode,
+                flashState = FlashState.OFF,
+                filterMode = if (mode == CaptureMode.PHOTO) it.filterMode else FilterMode.NONE,
+                filterBitmap = if (mode == CaptureMode.PHOTO) it.filterBitmap else null,
+                recordingDurationMillis = 0L
+            )
         }
         _effect.trySend(CameraEffect.RebindCamera)
         _effect.trySend(CameraEffect.SetFlash(FlashState.OFF, mode))
@@ -165,7 +171,7 @@ class CameraViewModel : ViewModel() {
     }
 
     private fun selectFilter(mode: FilterMode, bitmap: Bitmap?) {
-        if (_state.value.isRecordingLocked) return
+        if (_state.value.isRecordingLocked || _state.value.captureMode != CaptureMode.PHOTO) return
         _state.update { it.copy(filterMode = mode, filterBitmap = bitmap) }
     }
 

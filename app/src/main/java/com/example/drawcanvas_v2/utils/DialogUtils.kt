@@ -31,7 +31,8 @@ object DialogUtils {
     fun textInput(
         context: Context,
         initial: String,
-        onResult: (String) -> Unit
+        onResult: (String) -> Unit,
+        onCancel: () -> Unit = {}
     ) {
 
         val input =
@@ -40,13 +41,12 @@ object DialogUtils {
                 setSelection(text.length)
             }
 
-        AlertDialog.Builder(context)
+        val dialog = AlertDialog.Builder(context)
             .setTitle("Edit text")
             .setView(input)
-            .setNegativeButton(
-                "Cancel",
-                null
-            )
+            .setNegativeButton("Cancel") { _, _ ->
+                onCancel()
+            }
             .setPositiveButton(
                 "Done"
             ) { _, _ ->
@@ -57,6 +57,9 @@ object DialogUtils {
                         .trim()
                 )
             }
-            .show()
+            .create()
+
+        dialog.setOnCancelListener { onCancel() }
+        dialog.show()
     }
 }
